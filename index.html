@@ -29,7 +29,6 @@
             font-family: 'Inter', sans-serif;
             line-height: 1.65;
             overflow-x: hidden;
-            /* Отступ снизу, чтобы мобильная панель не перекрывала контент */
             padding-bottom: 0; 
         }
 
@@ -160,9 +159,10 @@
             align-items: center;
             padding: 140px 0 100px;
             position: relative;
+            /* Убрал папку images/ из пути */
             background: 
                 linear-gradient(to right, rgba(10,10,10,0.95) 40%, rgba(10,10,10,0.6) 100%),
-                url('images/hero.jpg') center/cover no-repeat;
+                url('hero.jpg') center/cover no-repeat;
             background-attachment: fixed;
         }
         .hero-content { max-width: 640px; }
@@ -306,7 +306,8 @@
         .about-image {
             height: 500px;
             border-radius: 8px;
-            background: url('images/about.jpg') center/cover no-repeat;
+            /* Убрал папку images/ из пути */
+            background: url('about.jpg') center/cover no-repeat;
             border: 1px solid var(--border);
             position: relative;
             overflow: hidden;
@@ -581,45 +582,23 @@
 
         /* ===== МОБИЛЬНАЯ ОПТИМИЗАЦИЯ (Смартфоны) ===== */
         @media (max-width: 600px) {
-            /* Добавляем отступ снизу, чтобы панель не перекрывала контент */
             body { padding-bottom: 70px; }
-            
             .mobile-cta { display: flex; }
-
-            /* Центрируем и уменьшаем отступы */
             section { padding: 60px 0; }
             .hero { 
                 text-align: center; 
                 padding: 100px 0 60px; 
-                /* Отключаем фиксацию фона для мобилок (убирает лаги) */
                 background-attachment: scroll; 
             }
             .hero-content { margin: 0 auto; }
             .hero p { margin-left: auto; margin-right: auto; font-size: 1rem; }
-            
-            /* Делаем кнопки на всю ширину */
-            .hero-buttons { 
-                flex-direction: column; 
-                gap: 10px; 
-            }
+            .hero-buttons { flex-direction: column; gap: 10px; }
             .btn { width: 100%; }
-
-            /* Уменьшаем шапку */
             .header-phone { font-size: 0.8rem; }
             .logo { font-size: 1.3rem; }
-
-            /* Отключаем тяжелый 3D-эффект в галерее на телефонах */
             .gallery-grid { perspective: none; }
-            .gallery-item { 
-                transform: translateY(30px) !important; 
-                opacity: 0;
-            }
-            .gallery-item.visible {
-                transform: translateY(0) !important;
-                opacity: 1;
-            }
-
-            /* Делаем карточки чуть компактнее */
+            .gallery-item { transform: translateY(30px) !important; opacity: 0; }
+            .gallery-item.visible { transform: translateY(0) !important; opacity: 1; }
             .feature-card, .pricing-card { padding: 24px 20px; }
             .process-step { padding: 20px; }
         }
@@ -627,7 +606,6 @@
 </head>
 <body>
 
-    <!-- 1. Полоса прогресса -->
     <div id="progress-bar"></div>
 
     <header>
@@ -721,12 +699,13 @@
                 <h2 class="section-title">Наши работы</h2>
             </div>
             <div class="gallery-grid">
-                <div class="gallery-item" style="background-image: url('images/work1.jpg');" data-label="Барбершоп / Коммерческий объект"></div>
-                <div class="gallery-item" style="background-image: url('images/work2.jpg');" data-label="Столовая / Детское учреждение"></div>
-                <div class="gallery-item" style="background-image: url('images/work3.jpg');" data-label="Образовательный проект / Карта"></div>
-                <div class="gallery-item" style="background-image: url('images/work4.jpg');" data-label="Музей / История Рязани"></div>
-                <div class="gallery-item" style="background-image: url('images/work5.jpg');" data-label="Школа / Литературный уголок"></div>
-                <div class="gallery-item" style="background-image: url('images/work6.jpg');" data-label="Портретная галерея"></div>
+                <!-- Убрал папку images/ из путей -->
+                <div class="gallery-item" style="background-image: url('work1.jpg');" data-label="Барбершоп / Коммерческий объект"></div>
+                <div class="gallery-item" style="background-image: url('work2.jpg');" data-label="Столовая / Детское учреждение"></div>
+                <div class="gallery-item" style="background-image: url('work3.jpg');" data-label="Образовательный проект / Карта"></div>
+                <div class="gallery-item" style="background-image: url('work4.jpg');" data-label="Музей / История Рязани"></div>
+                <div class="gallery-item" style="background-image: url('work5.jpg');" data-label="Школа / Литературный уголок"></div>
+                <div class="gallery-item" style="background-image: url('work6.jpg');" data-label="Портретная галерея"></div>
             </div>
         </div>
     </section>
@@ -852,7 +831,6 @@
         </div>
     </footer>
 
-    <!-- Мобильная панель связи (появляется только на телефонах) -->
     <div class="mobile-cta">
         <a href="tel:+79209817771" class="call-btn">Позвонить</a>
         <a href="https://vk.com/banksy_art_62" target="_blank" class="vk-btn">Написать</a>
@@ -861,7 +839,6 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             
-            // 1. Полоса прогресса прокрутки
             const progressBar = document.getElementById('progress-bar');
             window.addEventListener('scroll', () => {
                 const scrollTop = window.scrollY;
@@ -870,7 +847,6 @@
                 progressBar.style.width = scrollPercent + '%';
             });
 
-            // 2. Появление элементов при прокрутке
             const reveals = document.querySelectorAll('.reveal');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -882,7 +858,6 @@
             }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
             reveals.forEach(el => observer.observe(el));
 
-            // 3. Анимация галереи
             const galleryItems = document.querySelectorAll('.gallery-item');
             const galleryObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -894,8 +869,6 @@
             }, { threshold: 0.1 });
             galleryItems.forEach(el => galleryObserver.observe(el));
 
-            // 4. Эффект "Прожектора" (Только для ПК)
-            // Проверяем, есть ли у устройства мышь, чтобы не грузить мобилки
             if (window.matchMedia("(pointer: fine)").matches) {
                 const glowCards = document.querySelectorAll('.mouse-glow');
                 glowCards.forEach(card => {
